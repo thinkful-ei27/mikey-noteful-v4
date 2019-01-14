@@ -9,8 +9,9 @@ const localStrategy = require('./passport/local');
 
 const { PORT, MONGODB_URI } = require('./config');
 
-const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
+
 const notesRouter = require('./routes/notes');
 const foldersRouter = require('./routes/folders');
 const tagsRouter = require('./routes/tags');
@@ -28,14 +29,16 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
 // Create a static webserver
 app.use(express.static('public'));
 
-passport.use(localStrategy);
+
 
 // Parse request body
 app.use(express.json());
 
+passport.use(localStrategy);
+
 // Mount routers
-app.use('/api', usersRouter);
 app.use('/api', authRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/folders', foldersRouter);
 app.use('/api/tags', tagsRouter);
