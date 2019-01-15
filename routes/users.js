@@ -1,14 +1,13 @@
 'use strict';
 
 const express = require('express');
-
-
 const User = require('../models/user');
 
 const router = express.Router();
 
 router.post( '/', (req, res, next)=>{
   const { username, fullname, password } = req.body;
+  console.log(username, password);
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 

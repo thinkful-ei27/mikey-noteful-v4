@@ -5,17 +5,18 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
-
+const jwtStrategy = require('./passport/jwt');
 
 const { PORT, MONGODB_URI } = require('./config');
 
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
-
 const notesRouter = require('./routes/notes');
 const foldersRouter = require('./routes/folders');
 const tagsRouter = require('./routes/tags');
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 
 // Create an Express application
@@ -34,7 +35,8 @@ app.use(express.static('public'));
 // Parse request body
 app.use(express.json());
 
-passport.use(localStrategy);
+
+
 
 // Mount routers
 app.use('/api', authRouter);

@@ -8,9 +8,11 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, JWT_EXPIRY } = require('../config');
 
-const options = {session: false, failWithError: true};
 
+
+const options = {session: false, failWithError: true};
 const localAuth = passport.authenticate('local', options);
+// Protect endpoints using JWT Strategy
 
 function createAuthToken (user) {
   return jwt.sign({ user }, JWT_SECRET, {
@@ -20,10 +22,17 @@ function createAuthToken (user) {
 }
 
 router.post('/login', localAuth, (req, res) => {
+  console.log(req.user);
   const authToken = createAuthToken(req.user);
   res.json({ authToken });
 });
 
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
+
+router.post('/refresh', jwtAuth, (req, res) => {
+  const authToken = createAuthToken(req.user);
+  res.json({ authToken });
+});
 
 
  
