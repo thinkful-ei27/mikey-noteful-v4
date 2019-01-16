@@ -7,14 +7,14 @@ const notes = [
     'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     'folderId' : '111111111111111111111103',
     'tags': ['222222222222222222222201', '222222222222222222222203'],
-    'UserId' : '333333333333333333333301',
+    'userId' : '333333333333333333333301',
   },
   {
     '_id': '111111111111111111111107',
     'title': 'Cats hate a hot economy',
     'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     'folderId' : '111111111111111111111101',
-    'UserId' : '333333333333333333333301'
+    'userId' : '333333333333333333333301'
   },
   
   {
@@ -23,7 +23,7 @@ const notes = [
     'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     'folderId' : '111111111111111111111103',
     'tags': ['222222222222222222222201', '222222222222222222222203'],
-    'UserId' : '333333333333333333333301',
+    'userId' : '333333333333333333333301',
   },
   {
     '_id': '111111111111111111111105',
@@ -31,7 +31,7 @@ const notes = [
     'content': 'Lorem ipsum dolor sit amet, boring consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     'folderId' : '111111111111111111111101',
     'tags': ['222222222222222222222201', '222222222222222222222203'],
-    'UserId' : '333333333333333333333301',
+    'userId' : '333333333333333333333301',
   },
   {
     '_id': '111111111111111111111104',
@@ -39,7 +39,7 @@ const notes = [
     'content': 'Posuere sollicitudin aliquam ultrices sagittis orci a. Feugiat sed lectus vestibulum mattis ullamcorper velit. Odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Velit egestas dui id ornare arcu odio. Molestie at elementum eu facilisis sed odio morbi. Tempor nec feugiat nisl pretium. At tempor commodo ullamcorper a lacus. Egestas dui id ornare arcu odio. Id cursus metus aliquam eleifend. Vitae sapien pellentesque habitant morbi tristique. Dis parturient montes nascetur ridiculus. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Aliquam faucibus purus in massa tempor nec feugiat nisl.',
     'folderId' : '111111111111111111111102',
     'tags': ['222222222222222222222200', '222222222222222222222202'],
-    'UserId' : '333333333333333333333300',
+    'userId' : '333333333333333333333300',
 
   },
   {
@@ -48,7 +48,7 @@ const notes = [
     'content': 'Posuere sollicitudin aliquam ultrices sagittis orci a. Feugiat sed lectus vestibulum mattis ullamcorper velit. Odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Velit egestas dui id ornare arcu odio. Molestie at elementum eu facilisis sed odio morbi. Tempor nec feugiat nisl pretium. At tempor commodo ullamcorper a lacus. Egestas dui id ornare arcu odio. Id cursus metus aliquam eleifend. Vitae sapien pellentesque habitant morbi tristique. Dis parturient montes nascetur ridiculus. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Aliquam faucibus purus in massa tempor nec feugiat nisl.',
     'folderId' : '111111111111111111111102',
     'tags': ['222222222222222222222202'],
-    'UserId' : '333333333333333333333300',
+    'userId' : '333333333333333333333300',
 
   },
   {
@@ -57,7 +57,7 @@ const notes = [
     'content': 'Posuere sollicitudin aliquam ultrices sagittis orci a. Feugiat sed lectus vestibulum mattis ullamcorper velit. Odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Velit egestas dui id ornare arcu odio. Molestie at elementum eu facilisis sed odio morbi. Tempor nec feugiat nisl pretium. At tempor commodo ullamcorper a lacus. Egestas dui id ornare arcu odio. Id cursus metus aliquam eleifend. Vitae sapien pellentesque habitant morbi tristique. Dis parturient montes nascetur ridiculus. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Aliquam faucibus purus in massa tempor nec feugiat nisl.',
     'folderId' : '111111111111111111111102',
     'tags': ['222222222222222222222200', '222222222222222222222202'],
-    'UserId' : '333333333333333333333300',
+    'userId' : '333333333333333333333300',
 
   },
  
@@ -66,24 +66,28 @@ const notes = [
     'title': 'Juggling in space!',
     'content': 'Posuere sollicitudin aliquam ultrices sagittis orci a. Feugiat sed lectus vestibulum mattis ullamcorper velit. Odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Velit egestas dui id ornare arcu odio. Molestie at elementum eu facilisis sed odio morbi. Tempor nec feugiat nisl pretium. At tempor commodo ullamcorper a lacus. Egestas dui id ornare arcu odio. Id cursus metus aliquam eleifend. Vitae sapien pellentesque habitant morbi tristique. Dis parturient montes nascetur ridiculus. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Aliquam faucibus purus in massa tempor nec feugiat nisl.',
     'folderId' : '111111111111111111111100',
-    'UserId' : '333333333333333333333300',
+    'userId' : '333333333333333333333300',
   }
 ];
 
 const folders = [
   {
+    'userId' : '333333333333333333333300',
     '_id': '111111111111111111111100',
     'name': 'Pets'
   },
   {
+    'userId' : '333333333333333333333301',
     '_id': '111111111111111111111101',
     'name': 'Jokes'
   },
   {
+    'userId' : '333333333333333333333300',
     '_id': '111111111111111111111102',
     'name': 'Nature'
   },
   {
+    'userId' : '333333333333333333333301',
     '_id': '111111111111111111111103',
     'name': 'Juggling'
   }
@@ -91,18 +95,22 @@ const folders = [
 
 const tags = [
   {
+    'userId' : '333333333333333333333300',
     '_id': '222222222222222222222200',
     'name': 'tricks'
   },
   {
+    'userId' : '333333333333333333333301',
     '_id': '222222222222222222222201',
     'name': 'stunts'
   },
   {
+    'userId' : '333333333333333333333300',
     '_id': '222222222222222222222202',
     'name': 'hardwork'
   },
   {
+    'userId' : '333333333333333333333301',
     '_id': '222222222222222222222203',
     'name': 'outside'
   }
