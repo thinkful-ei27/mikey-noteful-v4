@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
   const userId = req.user.id;
 
 
-  Tag.find(userId)
+  Tag.find({userId})
     .sort('name')
     .then(results => {
       res.json(results);
@@ -104,7 +104,7 @@ router.put('/:id', (req, res, next) => {
 
   const updateTag = { name };
 
-  Tag.findByIdAndUpdate({_id: id}, userId, updateTag, { new: true })
+  Tag.findByIdAndUpdate({_id: id, userId}, updateTag, { new: true })
     .then(result => {
       if (result) {
         res.json(result);

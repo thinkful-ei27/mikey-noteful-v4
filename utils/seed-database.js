@@ -20,7 +20,15 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
       Folder.deleteMany(),
       Tag.deleteMany(),
       User.deleteMany(),
+      mongoose.connection.db.dropDatabase()
     ]);
+  })
+  .then( () => {
+    Note.ensureIndexes();
+    Folder.ensureIndexes();
+    Tag.ensureIndexes();
+    User.ensureIndexes();
+
   })
   .then(() => {
     console.info('Seeding Database...');

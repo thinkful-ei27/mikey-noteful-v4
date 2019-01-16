@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
   const userId = req.user.id;
 
 
-  Folder.find(userId)
+  Folder.find({userId})
     .sort('name')
     .then(results => {
       res.json(results);
@@ -70,11 +70,14 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
+ 
+
   Folder.create(newFolder)
     .then(result => {
       res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
     })
     .catch(err => {
+      console.log(err);
       if (err.code === 11000) {
         err = new Error('Folder name already exists');
         err.status = 400;
@@ -105,7 +108,7 @@ router.put('/:id', (req, res, next) => {
 
   const updateFolder = { name };
 
-  Folder.findByIdAndUpdate({_id: id}, userId, updateFolder, { new: true })
+  Folder.findByIdAndUpdate({_id: id, userId}, updateFolder, { new: true })
     .then(result => {
       if (result) {
         res.json(result);

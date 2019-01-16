@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const Note = require('../models/note');
+const Folder =require('../models/folder');
 
 const router = express.Router();
 
@@ -90,6 +91,19 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
+  if(folderId){
+    Folder.findById(folderId)
+      .then(result =>{
+        console.log(userId);
+        console.log(result.userId);
+        if(!result.userId.equals(userId) ){
+          const err = new Error('The `folderId` is not valid');
+          err.status = 400;
+          return next(err);
+        } else return;
+      });
+  }
+
   if (tags) {
     const badIds = tags.filter((tag) => !mongoose.Types.ObjectId.isValid(tag));
     if (badIds.length) {
@@ -160,7 +174,7 @@ router.put('/:id', (req, res, next) => {
     toUpdate.$unset = {folderId : 1};
   }
 
-  Note.findByIdAndUpdate({_id :id }, userId, toUpdate, { new: true })
+  Note.findByIdAndUpdate({_id :id , userId}, toUpdate, { new: true })
     .then(result => {
       if (result) {
         res.json(result);
