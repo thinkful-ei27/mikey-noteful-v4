@@ -19,7 +19,7 @@ describe('Noteful API - Users', function () {
   const fullname = 'Example User';
 
   before(function () {
-    return mongoose.connect(TEST_MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
+    return mongoose.connect(TEST_MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true })
       .then(() => User.deleteMany());
   });
 
@@ -47,7 +47,7 @@ describe('Noteful API - Users', function () {
           res = _res;
           expect(res).to.have.status(201);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.keys('id', 'username', 'fullname','createdAt', 'updatedAt');
+          expect(res.body).to.have.keys('id', 'username', 'fullname', 'createdAt', 'updatedAt');
           expect(res.body.id).to.exist;
           expect(res.body.username).to.equal(username);
           expect(res.body.fullname).to.equal(fullname);
@@ -64,13 +64,13 @@ describe('Noteful API - Users', function () {
         });
     });
 
-    it('Should reject users with missing username', function(){
+    it('Should reject users with missing username', function () {
       let res;
       return chai.request(app)
         .post('/api/users')
-        .send({password, fullname })
-        .then(_res =>{
-          res =_res;
+        .send({ password, fullname })
+        .then(_res => {
+          res = _res;
           console.log('this is the res', res.body);
           expect(res).to.have.status(422);
           expect(res.body.message).to.equal('Missing field');
@@ -80,14 +80,13 @@ describe('Noteful API - Users', function () {
         });
 
     });
-    it('Should reject users with missing password',function(){
+    it('Should reject users with missing password', function () {
       let res;
       return chai.request(app)
         .post('/api/users')
-        .send({username, fullname })
-        .then(_res =>{
-          res =_res;
-          console.log('this is the res', res.body);
+        .send({ username, fullname })
+        .then(_res => {
+          res = _res;
           expect(res).to.have.status(422);
           expect(res.body.message).to.equal('Missing field');
           expect(res.body.location).to.equal('password');
@@ -95,16 +94,150 @@ describe('Noteful API - Users', function () {
 
         });
     });
-    it('Should reject users with non-string username');
-    it('Should reject users with non-string password');
-    it('Should reject users with non-trimmed username');
-    it('Should reject users with non-trimmed password');
-    it('Should reject users with empty username');
-    it('Should reject users with password less than 8 characters');
-    it('Should reject users with password greater than 72 characters');
-    it('Should reject users with duplicate username');
-    it('Should trim fullname');
+    it('Should reject users with non-string username', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username: 5646546464564, password, fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Incorrect field type: expected string');
+          expect(res.body.location).to.equal('username');
+          expect(res.body.reason).to.equal('ValidationError');
 
+        });
+    });
+
+    it('Should reject users with non-string password', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username, password: 5646546464564, fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Incorrect field type: expected string');
+          expect(res.body.location).to.equal('password');
+          expect(res.body.reason).to.equal('ValidationError');
+
+        });
+    });
+    it('Should reject users with non-trimmed username', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username: ' exampleuser ', password, fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Cannot start or end with whitespace');
+          expect(res.body.location).to.equal('username');
+          expect(res.body.reason).to.equal('ValidationError');
+
+        });
+    });
+    it('Should reject users with non-trimmed password', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username, password: ' examplepassword ', fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Cannot start or end with whitespace');
+          expect(res.body.location).to.equal('password');
+          expect(res.body.reason).to.equal('ValidationError');
+
+        });
+    });
+    it('Should reject users with empty username', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username: '', password, fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Must be at least 1 characters long');
+          expect(res.body.location).to.equal('username');
+          expect(res.body.reason).to.equal('ValidationError');
+
+        });
+    });
+    it('Should reject users with password less than 8 characters', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username, password: '2short', fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Must be at least 10 characters long');
+          expect(res.body.location).to.equal('password');
+          expect(res.body.reason).to.equal('ValidationError');
+
+        });
+    });
+    it('Should reject users with password greater than 72 characters',function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ 
+          username,
+          password: new Array(73).fill('m').join(''), 
+          fullname })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(422);
+          expect(res.body.message).to.equal('Must be at most 72 characters long');
+          expect(res.body.location).to.equal('password');
+          expect(res.body.reason).to.equal('ValidationError');
+
+        });
+    });
+    it('Should reject users with duplicate username', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ 
+          username,
+          password, 
+          fullname })
+        .then(() => {
+          return chai.request(app)
+            .post('/api/users')
+            .send({ 
+              username,
+              password, 
+              fullname })
+            .then((_res)=>{
+              res = _res;
+              expect(res).to.have.status(400);
+              expect(res.body.message).to.equal('The username already exists');
+
+            });
+        });
+    
+
+    });
+    it('Should trim fullname', function () {
+      let res;
+      return chai.request(app)
+        .post('/api/users')
+        .send({ username, 
+          password,
+          fullname : ' whitespace fullname ' })
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.keys('id', 'username', 'fullname', 'createdAt', 'updatedAt');
+          expect(res.body.id).to.exist;
+          expect(res.body.username).to.equal(username);
+          expect(res.body.fullname).to.equal('whitespace fullname');
+        });
+    });
   });
 
 });

@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post( '/', (req, res, next)=>{
   const { username, fullname, password } = req.body;
-  console.log(username, password);
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -87,7 +86,7 @@ router.post( '/', (req, res, next)=>{
       const newUser = {
         username,
         password: digest,
-        fullname
+        fullname : fullname.trim()
       };
       return User.create(newUser);
     })
