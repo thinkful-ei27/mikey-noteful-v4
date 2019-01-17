@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   password : { type : String, required : true }
 });
 
-
+userSchema.set('timestamps', true);
 
 userSchema.set('toJSON', {
   virtuals: true,     // include built-in virtual `id`
