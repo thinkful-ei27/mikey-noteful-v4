@@ -243,7 +243,7 @@ describe('Noteful API - Notes', function () {
         .then(_data => {
           data = _data;
           return chai.request(app).get(`/api/notes/${data.id}`)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then((res) => {
           expect(res).to.have.status(200);
@@ -284,7 +284,7 @@ describe('Noteful API - Notes', function () {
       return Note.findOne({userId:user.id})
         .then(data => {
           return chai.request(app).get(`/api/notes/${data.id}`)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(res => {
           expect(res).to.have.status(500);
@@ -547,7 +547,7 @@ describe('Noteful API - Notes', function () {
           updateItem.folderId = folder.id;
           data = note;
           return chai.request(app).put(`/api/notes/${note.id}`).send(updateItem)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(function (res) {
           expect(res).to.have.status(200);
@@ -579,7 +579,7 @@ describe('Noteful API - Notes', function () {
           updateItem.tags.push(tag.id);
           data = note;
           return chai.request(app).put(`/api/notes/${note.id}`).send(updateItem)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(function (res) {
           expect(res).to.have.status(200);
@@ -675,7 +675,7 @@ describe('Noteful API - Notes', function () {
         .then((note) => {
           data = note;
           return chai.request(app).put(`/api/notes/${note.id}`).send(updateItem)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(function (res) {
           expect(res).to.have.status(200);
@@ -744,7 +744,7 @@ describe('Noteful API - Notes', function () {
         .then(_data => {
           data = _data;
           return chai.request(app).delete(`/api/notes/${data.id}`)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(res => {
           expect(res).to.have.status(204);
@@ -770,7 +770,7 @@ describe('Noteful API - Notes', function () {
       return Note.findOne({userId:user.id})
         .then(data => {
           return chai.request(app).delete(`/api/notes/${data.id}`)
-          .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(res => {
           expect(res).to.have.status(500);

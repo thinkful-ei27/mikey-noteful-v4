@@ -42,7 +42,7 @@ describe('Noteful API - Folders', function () {
       Note.createIndexes(),
       Folder.createIndexes(),
       User.createIndexes()
-        ])
+    ])
       .then(([users]) => {
         user = users[0];
         token = jwt.sign({ user }, JWT_SECRET, { subject: user.username });
