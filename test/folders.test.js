@@ -39,7 +39,10 @@ describe('Noteful API - Folders', function () {
       User.insertMany(users),
       Folder.insertMany(folders),
       Note.insertMany(notes),
-    ])
+      Note.createIndexes(),
+      Folder.createIndexes(),
+      User.createIndexes()
+        ])
       .then(([users]) => {
         user = users[0];
         token = jwt.sign({ user }, JWT_SECRET, { subject: user.username });
@@ -132,7 +135,7 @@ describe('Noteful API - Folders', function () {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.be.an('object');
-          // expect(res.body).to.have.all.keys('id', 'name','userId', 'createdAt', 'updatedAt');
+          expect(res.body).to.have.all.keys('id', 'name','userId', 'createdAt', 'updatedAt');
           expect(res.body.id).to.equal(data.id);
           expect(res.body.name).to.equal(data.name);
           expect(new Date(res.body.createdAt)).to.eql(data.createdAt);
@@ -362,6 +365,7 @@ describe('Noteful API - Folders', function () {
           const [item1, item2] = results;
           console.log(item1.name, item2.name);
           item1.name = item2.name;
+          console.log(item1.name);
           return chai.request(app)
             .put(`/api/folders/${item1.id}`)
             .set('Authorization', `Bearer ${token}`)

@@ -36,7 +36,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 
-
+ 
 
 // Mount routers
 app.use('/api', authRouter);
