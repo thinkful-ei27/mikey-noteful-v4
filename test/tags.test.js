@@ -121,7 +121,7 @@ describe('Noteful API - Tags', function () {
 
   describe('GET /api/tags/:id', function () {
 
-    it('should return correct tags', function () {
+    it.skip('should return correct tags', function () {
       let data;
       return Tag.findOne({userId: user.id})
         .then(_data => {
